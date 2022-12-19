@@ -2,7 +2,6 @@ import React from 'react';
 import { usePlane } from '@react-three/cannon';
 
 import * as textures from '../../textures';
-// import { useStore } from '../../hooks/objStore';
 
 export const Ground = (props) => {
   const [ref] = usePlane(() => ({ 
@@ -27,13 +26,7 @@ export const Ground = (props) => {
   groundTexture.repeat.set(width, length);
 
   return (
-    <mesh
-      ref={ref}
-      receiveShadow
-      // onClick={(e) => {
-      //   e.stopPropagation();
-      // }}
-    >
+    <mesh ref={ref} receiveShadow >
       <planeBufferGeometry attach="geometry" args={[width, length]} />
       <meshStandardMaterial map={groundTexture} attach="material" />
     </mesh>

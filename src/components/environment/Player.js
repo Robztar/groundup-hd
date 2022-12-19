@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { useSphere } from '@react-three/cannon';
 import { useThree, useFrame } from '@react-three/fiber';
-// import { FPVControls } from './FPVControls';
-// import { FPVdrag } from './FPVdrag';
 import { useKeyboardControls } from '../../hooks/useKeyboardControls';
 import { Vector3 } from 'three';
 
 const SPEED = 6;
 
+// ----- Camera Movement in 3D mode -----
 export const Player = (props) => {
   const { camera } = useThree();
-  const { moveForward, moveBackward, moveLeft, moveRight, jump } =
+  const { moveForward, moveBackward, moveLeft, moveRight } =
     useKeyboardControls();
   const [ref, api] = useSphere(() => ({
     mass: 1,
@@ -50,17 +49,9 @@ export const Player = (props) => {
       .applyEuler(camera.rotation);
 
     api.velocity.set(direction.x, velocity.current[1], direction.z);
-
-    // if (jump && Math.abs(velocity.current[1].toFixed(2)) < 0.05) {
-    //   api.velocity.set(velocity.current[0], 8, velocity.current[2]);
-    // }
   });
   return (
     <>
-      {/* <FPVControls /> */}
-      {/* <FPVdrag /> */}
-      {/* Try to move around player with OrbitControls */}
-      {/* Try to get the pointer working while rotating */}
       <mesh ref={ref} />
     </>
   );

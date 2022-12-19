@@ -8,21 +8,6 @@ import logo from '../images/GroundUp-Logo.png';
 
 import { useStore } from '../hooks/objStore';
 
-// All construction materials estimated
-     // https://www.my-island-jamaica.com/materials-needed-to-build-a-house-in-jamaica.html
-     // https://happho.com/choose-building-materials-estimate-cost-quantities-house-construction/
-     // https://www.veriaconcyclopedia.com/v/esti/esti-chbr
-
-// Foundation Estimation
-     // https://www.hunker.com/13401739/how-to-estimate-a-concrete-foundation
-     // https://www.hunker.com/12001614/how-to-calculate-rebar-needed-in-a-concrete-foundation
-     // https://theconstructor.org/practical-guide/measurement-of-reinforced-concrete-works/8228/
-     // https://theconstructor.org/practical-guide/material-estimation/
-
-// Calculate concrete blocks needed
-     // https://www.hunker.com/13401526/how-to-calculate-how-many-concrete-blocks-are-needed-for-a-garage
-     // https://www.lceted.com/2022/05/concrete-block-calculator-estimator.html
-
 const Dash = ()=>{
      const [objects, fixtures, projects,
           addProj,
@@ -58,7 +43,6 @@ const Dash = ()=>{
      const changeView = (e) => {
           const projName = e.target.getAttribute("data-proj");
           const pKey = e.target.getAttribute("data-projid");
-          // console.log(projName);
           setProjWindow(projName);
           setProjKey(pKey);
      }
@@ -85,7 +69,6 @@ const Dash = ()=>{
           delProject(projKey);
           delProjWorld(projKey);
           delProjFixes(projKey);
-          // console.log(projects[0]);
           saveProjects();
           saveWorld();
           saveFixtures();
@@ -201,26 +184,19 @@ const Dash = ()=>{
                steelRate = 0.004;  // tonnes of steel per sqft
                blocksRate = 1.92;  // blocks per sqft
           }
-          // console.log("projInstance is up: "+projInstance);
      }
-     // else{console.log("projInstance is down: ")}
 
-     // No of 42.5kg cement bags
-     let totCementBags = Math.ceil(projVals.floorArea * cementRate);
-     // No of concrete blocks
-     let totBlocks = Math.ceil(projVals.floorArea * blocksRate);
-     // Cubic (m / yards) of sand
-     let totSandVol = projVals.floorArea * sandRate;
-     // Cubic (m /yards) of aggregate -- stone
-     let totAggrVol = projVals.floorArea * aggrRate;
-     // (tonnes) of steel
-     let totSteelWt = projVals.floorArea * steelRate;
+     
+     let totCementBags = Math.ceil(projVals.floorArea * cementRate);  // No of 42.5kg cement bags
+     let totBlocks = Math.ceil(projVals.floorArea * blocksRate);      // No of concrete blocks
+     let totSandVol = projVals.floorArea * sandRate;   // Cubic (m / yards) of sand
+     let totAggrVol = projVals.floorArea * aggrRate;   // Cubic (m /yards) of aggregate -- stone
+     let totSteelWt = projVals.floorArea * steelRate;  // (tonnes) of steel
 
      return (
           <div className="dash-gen-cont">
-               {/* NavBar */}
+               {/* General NavBar */}
                {projWindow ? null : <GenNav />}
-               
 
                <div className="dash-cont">
                     <section className='dash-sect'>
@@ -267,12 +243,14 @@ const Dash = ()=>{
 
                          {/* Selected Project's Data */}
                          <div className={`proj-window-cont ${projWindow === null ? '' : 'active'}`}>
+                              {/* Window Header */}
                               <div className='proj-window-header'>
                                    <h2>{projWindow === null ? '' :
                                         projWindow.charAt(0).toUpperCase() + projWindow.slice(1)
                                    }</h2>
                                    <i className="far fa-times-circle" onClick={changeView}></i>
                               </div>
+                              {/* Project Controls */}
                               <div className='proj-controls'>
                                    <Link to={`/edit?id=${projKey}`} className='proj-open'>
                                         Open Project
@@ -319,6 +297,7 @@ const Dash = ()=>{
                                         <i className='fas fa-trash-alt proj-del' onClick={togglePop}></i>
                                    </div>
                               </div>
+                              {/* Project Details */}
                               <div className='proj-details'>
                                    <div className='proj-areas'>
                                         <div>Floor Area = {+projVals.floorArea.toFixed(2)} {scale==='metric'? 'm':'ft'} <sup>2</sup></div>
@@ -388,7 +367,7 @@ const Dash = ()=>{
                     </section>
                </div>
 
-               {/* Create New Projects */}
+               {/* Create Project Window */}
                <div className={`float pop-cont ${createPopup ? 'active' : ''}`}>
                     <div className='pop-check'>
                          <h2>Create Project</h2>
@@ -435,7 +414,6 @@ const Dash = ()=>{
                                         }else{
                                              conv = 10
                                         }
-                                        console.log("Name: "+name+" Scale: "+choice+" Conv: "+conv);
                                         addProj(name, choice, conv);
                                         saveProjects();
                                         toggleCreatePop();
@@ -445,7 +423,7 @@ const Dash = ()=>{
                     </div>
                </div>
 
-               {/* Deletion Confirm */}
+               {/* Deletion Confirmation */}
                <Confirm 
                     popMenu={popMenu}
                     togglePop={togglePop}

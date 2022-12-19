@@ -4,6 +4,7 @@ import { useThree, extend } from '@react-three/fiber';
 
 extend({ PointerLockControlsImpl });
 
+// ---- Camera roation control in 3D mode -----
 export const FPVControls = (props) => {
   const { camera, gl } = useThree();
   const controls = useRef();
@@ -14,16 +15,13 @@ export const FPVControls = (props) => {
       if (e.code === 'Space'){
         if (c <= 0){
           controls.current.lock();
-          c++
-          console.log('Space')
+          c++;
         }
         else if(c > 0){
           controls.current.unlock();
-          c--
-          console.log('Space Again')
+          c--;
         }
       }
-      
     });
   }, []);
 
@@ -35,6 +33,3 @@ export const FPVControls = (props) => {
     />
   );
 };
-
-// For now let's move on to finishing the video this is based on and removing unnecessary minecraft parts
-// https://threejs.org/docs/#examples/en/controls/PointerLockControls

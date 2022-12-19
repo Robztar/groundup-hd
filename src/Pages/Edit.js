@@ -4,26 +4,30 @@ import { Sky, OrthographicCamera, PerspectiveCamera } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import * as THREE from 'three';
 
-import { Room } from '../components/rooms/Room';
-
+// --- HTML components ---
 import Navbar from '../components/html/Navbar';
 import SpaceReminder from '../components/html/SpaceReminder';
 import { Attribute } from '../components/html/Attribute';
 import { WallMenu } from '../components/html/WallMenu';
 import { Confirm } from '../components/html/Confirm';
 
+// --- 3D environment components ---
 import { Ground } from '../components/environment/Ground';
 import { FPVControls } from '../components/environment/FPVControls';
 import { Player } from '../components/environment/Player';
+import { Room } from '../components/rooms/Room';
 
+// --- Hooks ---
 import { useKeyboardControls } from '../hooks/useKeyboardControls';
 import { useStore } from '../hooks/objStore'; 
 
+// --- Pointer Image ---
 import pointer from '../images/cursor.png';
 
 // ---------------- Camera Controls ----------------
 let pos = [0,1,0];
 
+// --- Orthographic Projection ---
 const MakeOrtho = ({scale}) => {
      const vec = new THREE.Vector3();
 
@@ -58,6 +62,7 @@ const MakeOrtho = ({scale}) => {
      );
 }
 
+// --- Perspective Projection
 const MakePersp = ({scale}) =>{
      // Measurement Scale
      let userPos
@@ -76,24 +81,21 @@ const MakePersp = ({scale}) =>{
 }
 
 export default function Edit() {
-     // Measurement Scale
      const [projects, objects, 
-          addObj, switchOrtho, 
-          switchScale, switchConv, 
-
+          addObj, 
+          switchOrtho, 
+          switchScale, 
+          switchConv, 
           saveProjects, 
           saveWorld, 
           saveFixtures, 
           delProjWorld,
           delProjFixes,
-     ] = useStore((state) => [
-          state.projects,
-          state.objects,
+     ] = useStore((state) => [ state.projects, state.objects,
           state.addObj,
           state.switchOrtho,
           state.switchScale,
           state.switchConv,
-
           state.saveProjects,
           state.saveWorld,
           state.saveFixtures,
@@ -101,13 +103,12 @@ export default function Edit() {
           state.delProjFixes,
      ]);
 
-     // Query String
+     // --- Query String for Project ID
      const [queryId, setQueryId] = useState('');
      useEffect(() => {
           if(window.location.search){
                let qSearch = window.location.search.substring(1);
                let qParts = qSearch.split('=');
-               // console.log("key = "+qParts[0]+" value = "+qParts[1]);
                setQueryId(qParts[1]);
           }
      },[]);
@@ -117,25 +118,20 @@ export default function Edit() {
      let projName = 'Project Name';
      let gridLen;
      let gridBoxCount;
-     // console.log("Query key: "+queryId);
 
      let scale = 'metric';
      if(projInstance){
-          // console.log("Project key: "+projInstance.key);
           projKey = projInstance.key;
           scale = projInstance.scale;
           projName = projInstance.name;
-          // console.log(scale);
      }
      const makeMetric = () => {
           switchScale('metric', projKey);
           switchConv(12, projKey);
-          // console.log(scale);
      }
      const makeImperial = () => {
           switchScale('imperial', projKey);
           switchConv(10, projKey);
-          // console.log(scale);
      }
      if(scale === 'metric'){
           gridLen = 256;
@@ -174,7 +170,6 @@ export default function Edit() {
           saveProjects();
           saveFixtures();
           saveWorld();
-          // console.log("Saved Now");
      }
      const resetScene = () =>{
           delProjWorld(projKey);
@@ -186,7 +181,6 @@ export default function Edit() {
      useEffect(() => {
           const interval = setInterval(()=>{
                saveScene();
-               // console.log("Saved Now");
           }, 5000);
           return () => clearInterval(interval);
      },[]);
@@ -204,9 +198,6 @@ export default function Edit() {
                          <Ground position={[0, -0.5, 0]} scale={scale} />
                     </Physics>
                     {objects.map(({key, shape, objType, projId}) =>{
-                         // console.log("Object's proj: "+projId);
-                         // console.log("Pages's proj: "+projKey);
-                              
                          if(projId === projKey){
                               if(objType === 'room'){
                                    return(
@@ -224,7 +215,7 @@ export default function Edit() {
 
                <Navbar projName={projName} saveScene={saveScene} />
 
-               {/* Objects Select Menu */}
+               {/* Select Menu */}
                <div className={`top drop-menu ${isActive ? 'active' : ''}`} > 
                     <div className={`exham extgl ${isActive ? 'active' : ''}`} onClick={toggleClass}>
                          <div className="tripbar"></div>
@@ -288,7 +279,6 @@ export default function Edit() {
                          <img src={pointer} alt='pointer' />
                     </div>
                }
-               
           </div>
      );
 }

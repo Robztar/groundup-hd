@@ -30,25 +30,19 @@ export const Fixtures = ({ ...props }) =>{
 
           let fixColor = fixInstance.color;
           let fixTexture = textures[fixInstance.texture];
-          // fixTexture.repeat.set(dimensions[1],dimensions[2]);
           let wallHeight = objInstance.wallDimTempY[wallNo] * conversion;
 
           const Door = () =>{
                // adjust Y axis position
                let prevPos = [
                     fixInstance.pos[0],
-                    // -dimensions[1]/2,
                     (dimensions[1] - wallHeight) / 2,
-
-                    // -(dimensions[1]),
                     fixInstance.pos[2]
                ];
-               // console.log(prevPos);
+
                if(ortho){
-               // if(wallNo === 2){
                     prevPos[1] = dimensions[1]/2;
                }
-               // console.log("Door pos is: "+ prevPos);
 
                box = new THREE.BoxBufferGeometry(dimensions[0],dimensions[1],dimensions[2]);
                
@@ -60,7 +54,6 @@ export const Fixtures = ({ ...props }) =>{
                                    attach="material" 
                                    color={fixColor}
                                    map={fixTexture}
-                                   // opacity={doorTexture === 'glass'? 0.6 : 1}
                                    transparent={true}
                               />
                          </mesh>
@@ -75,10 +68,8 @@ export const Fixtures = ({ ...props }) =>{
                     fixInstance.pos[2]
                ];
                if(ortho){
-                    // if(wallNo === 2){
-                         prevPos[1] = dimensions[1]/2;
+                    prevPos[1] = dimensions[1]/2;
                }
-               // console.log("Window pos is: "+ prevPos);
                box = new THREE.BoxBufferGeometry(dimensions[0],dimensions[1],dimensions[2]);
                
                return(
@@ -89,7 +80,6 @@ export const Fixtures = ({ ...props }) =>{
                                    attach="material" 
                                    color={fixColor}
                                    map={textures[fixTexture]}
-                                   // opacity={windowTexture === 'glass'? 0.6 : 1}
                                    transparent={true}
                               />
                          </mesh>

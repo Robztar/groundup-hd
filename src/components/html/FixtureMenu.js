@@ -2,12 +2,10 @@ import { useStore } from '../../hooks/objStore';
 import { useState } from 'react';
 
 export const FixTureMenu = ({...props}) =>{
-
      let fixId = props.fixId;
      let setFixEditMenu = props.setFixEditMenu;
      let setActiveFix = props.setActiveFix;
      let setFixTypeMenu = props.setFixTypeMenu;
-
      let objInstance = props.objInstance;
      let wallNo = props.wallNo;
 
@@ -25,11 +23,11 @@ export const FixTureMenu = ({...props}) =>{
           state.setFixPos,
      ]);
 
-     const[fixOptions,setFixOptions] = useState(false);   // Textures / Colors Menu
+     const[fixOptions,setFixOptions] = useState(false);     // Textures / Colors Menu
      const[fixTextureMenu,setFixTextureMenu] = useState(false);   // Textures / Colors Menu
-     const[matType,setMatType] = useState(false);    // Material Type for Menu
-     const[fixPropMenu,setFixPropMenu] = useState(false);    // Properties Menu
-     const[fixPosMenu,setFixPosMenu] = useState(false);    // Position Menu
+     const[matType,setMatType] = useState(false);           // Material Type for Menu
+     const[fixPropMenu,setFixPropMenu] = useState(false);   // Properties Menu
+     const[fixPosMenu,setFixPosMenu] = useState(false);     // Position Menu
 
 
      let fixInstance = fixtures.find(o => o.key === fixId);
@@ -70,7 +68,6 @@ export const FixTureMenu = ({...props}) =>{
                          Math.floor((((actUnits[2] % 1) * 100) % 1) * 10)  //mm
                     ],
                ];
-               // console.log("Width is "+ actSubUnits[0][0]+"m, "+actSubUnits[0][1]+"cm, "+actSubUnits[0][2]+"mm.");
           }else if (scale === 'imperial'){
                actUnits = [dimensions[0],dimensions[1],dimensions[2]];
                actSubUnits = [
@@ -93,7 +90,6 @@ export const FixTureMenu = ({...props}) =>{
                          Math.floor((((actUnits[2] % 1) * 12) % 1) * 16)  //fract
                     ],
                ];
-               // console.log("Width is "+ actSubUnits[0][0]+"ft, "+actSubUnits[0][1]+" , "+actSubUnits[0][2]+"in.");
           }
 
           return(
@@ -333,14 +329,10 @@ export const FixTureMenu = ({...props}) =>{
                                                                            let rDimTemp;
                                                                            if(scale === 'metric'){
                                                                                 tot = lg + (med/100) + (sm/1000);
-                                                                                // console.log("Width is "+lg+"m, "+med+"cm, "+sm+"mm.");
-                                                                                // console.log("Total Width is " + tot);
                                                                                 rDimTemp=[actUnits[0]/3, tot/3, actUnits[2]/3];
                                                                            }else if(scale === 'imperial'){
                                                                                 let ret_sm = sm/(12*16);
                                                                                 tot = lg + (med/12) + (ret_sm);
-                                                                                // console.log("Width is "+lg+"ft, "+med+" and "+sm+"/16 in.");
-                                                                                // console.log("Total Width is " + tot);
                                                                                 rDimTemp=[actUnits[0]/10, tot/10,actUnits[2]/10];
                                                                            }
                                                                            setFixDimTemp(rDimTemp, fixId);

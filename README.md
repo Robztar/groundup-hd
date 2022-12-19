@@ -8,7 +8,7 @@ The features supported by GroundUp HD incluse:
 
 This was a project done by Robert McFarlane for the course Advanced Project at the northern Caribbean University
 
-### Running this app
+## Running this app
 To run this app:
 1. download this repository
 2. Use a command-line interface and naviagte to the folder containing the project files.

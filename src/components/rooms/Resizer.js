@@ -2,16 +2,12 @@ import { useStore } from '../../hooks/objStore';
 import { useState, useEffect } from 'react';
 
 export const Resizer = ({...props}) =>{
-     const [ objects, projects,
-          setActive,
-          setResize,
-          setAttrMenu, 
+     const [ projects,
+          setResize, 
           setDimTemp,
           setPos,
-     ] = useStore((state) => [ state.objects, state.projects,
-          state.setActive,
+     ] = useStore((state) => [ state.projects,
           state.setResize,
-          state.setAttrMenu,
           state.setDimTemp,
           state.setPos,
      ]);
@@ -32,24 +28,18 @@ export const Resizer = ({...props}) =>{
      ];
 
      const[unitX,setUnitX] = useState(dimensions[0]/4);
-     // const[unitY,setUnitY] = useState(dimensions[1]/4);
      const[unitZ,setUnitZ] = useState(dimensions[2]/4);
      
      useEffect(()=>{
           if(scale === 'metric'){
                setUnitX(dimensions[0]/4);
-               // setUnitY(dimensions[1]/4);
                setUnitZ(dimensions[2]/4);
           }
           else if (scale === 'imperial'){
                setUnitX(dimensions[0]);
-               // setUnitY(dimensions[1]);
                setUnitZ(dimensions[2]);
           }
-     // },[scale]);
-     },[objInstance]);
-     // },[objInstance,scale]);
-     // Checking both works but causes position and size glitches
+     },[objInstance,scale]);
 
      return(
           <div 
@@ -122,12 +112,9 @@ export const Resizer = ({...props}) =>{
                                         rDimTemp=[rVal/10, dimensions[1]/10,dimensions[2]/10];
                                         difference = (rVal) - dimensions[0];
                                    }
-                                   // console.log('Real-value = '+rVal);
-                                   // console.log("Dimensions Difference: "+ difference);
                                    
                                    let posOffset = [objInstance.pos[0] - (difference/2), 
                                         objInstance.pos[1], objInstance.pos[2]];
-                                   // console.log("Position Offset is: "+ posOffset)
 
                                    setPos(posOffset, unique);
                                    setDimTemp(rDimTemp, unique);
@@ -135,12 +122,9 @@ export const Resizer = ({...props}) =>{
                          ></i>
                          <input 
                               className='resizer-input'
-                              // defaultValue={actUnits[0]}
                               type="number"
                               value={unitX}
                               onChange={(e) => setUnitX(e.target.value)}
-                              // value={unitX.current}
-                              // onChange={(e) => unitX.current = e.target.value}
                               id="rs-width"
                          />
                          <i 

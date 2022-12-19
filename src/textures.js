@@ -54,13 +54,3 @@ export const glass = new TextureLoader().load(glassImg);
 export const grass = new TextureLoader().load(grassImg);
 grass.wrapS = MirroredRepeatWrapping;
 grass.wrapT = MirroredRepeatWrapping;
-
-// Textures Source:
-     // https://polyhaven.com/textures
-     // http://texturelib.com/
-     // https://www.poliigon.com/search?credit=0
-          // https://cloudconvert.com/avif-to-jpg
-
-// Color help
-     // https://www.rapidtables.com/web/color/RGB_Color.html
-     // https://fffuel.co/cccolor/

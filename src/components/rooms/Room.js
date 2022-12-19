@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
-// import { useState, useEffect } from 'react';
 import * as THREE from 'three';
 
 import { MinSelect } from './MinSelect';
@@ -49,12 +48,8 @@ export const Room = ({ unique }) =>{
                mouseLoc.x = Math.round(mouseLoc.x * window.innerWidth* 1.25)/100;
                mouseLoc.z = Math.round(mouseLoc.z * window.innerHeight *-1.25)/100;
      
-               // Grid-locking can be made optional
-               // mouseLoc.x = Math.round(mouseLoc.x);
-               // mouseLoc.z = Math.round(mouseLoc.z);
                mouseLoc.x = +mouseLoc.x.toFixed(1);
                mouseLoc.z = +mouseLoc.z.toFixed(1);
-               // Can also create a movement limiter based on grid (and Ground) size
 
                // Metric Scale
                if(scale === 'metric'){
@@ -79,18 +74,6 @@ export const Room = ({ unique }) =>{
           }
      }
 
-     // --------- Up Next ----------
-     // 4. Have modes for Attribute Menu
-          // a. [DONE] Rooms (and maybe for walls as well)
-          // b. Models
-     // 10. Fix object movement (off center)
-          // a. If the orthographic camera is moved,
-          // b. ... the object is offset from the cursor
-          // c. Possible solution: Try "raycaster".
-          // d. Other Solution: ScreenX (/Y):
-               // https://extendscript.docsforadobe.dev/user-interface-tools/event-handling.html#screenx-and-screeny
-
-
      if (objInstance) {
           let rotY = THREE.Math.degToRad(objInstance.rotationY);
           return (
@@ -106,7 +89,6 @@ export const Room = ({ unique }) =>{
                          event.stopPropagation();
                          document.removeEventListener('mousemove',onMouseMove);
                          var [x,y,z] = [mouseLoc.x,mouseLoc.y,mouseLoc.z];
-                         console.log('key I try to use: ' + unique);
                          setPos([x,y,z], unique);
                     }}
                     onClick={() => {
@@ -117,20 +99,14 @@ export const Room = ({ unique }) =>{
                     {ortho? null:
                          <Floor 
                               instance={objInstance}
-                              unique={unique}
                               conversion={conversion}
-                              scale={scale}
-                              ortho={ortho}
                               height={objInstance.wallDimTempY[0]}
                          />
                     }
                     {/* Floor */}
                     <Floor
                          instance={objInstance}
-                         unique={unique}
                          conversion={conversion}
-                         scale={scale}
-                         ortho={ortho}
                          height={0}
                     />
                     {/* Left */}
@@ -139,7 +115,6 @@ export const Room = ({ unique }) =>{
                          unique={unique}
                          rotY={0}
                          conversion={conversion}
-                         scale={scale}
                          ortho={ortho}
                          wallNo={0}
                     />
@@ -150,7 +125,6 @@ export const Room = ({ unique }) =>{
                          unique={unique}
                          rotY={0}
                          conversion={conversion}
-                         scale={scale}
                          ortho={ortho}
                          wallNo={1}
                     />
@@ -161,7 +135,6 @@ export const Room = ({ unique }) =>{
                          unique={unique}
                          rotY={Math.PI/2}
                          conversion={conversion}
-                         scale={scale}
                          ortho={ortho}
                          wallNo={2}
                     />
@@ -172,7 +145,6 @@ export const Room = ({ unique }) =>{
                          unique={unique}
                          rotY={Math.PI/2}
                          conversion={conversion}
-                         scale={scale}
                          ortho={ortho}
                          wallNo={3}
                     />
@@ -183,8 +155,7 @@ export const Room = ({ unique }) =>{
                     </Html>
                </group>
           );
-     } else{
-          // console.log('Left the chat');
+     }else{
           return null;
      }
 }

@@ -1,18 +1,13 @@
 import React from "react"
-// import { useState } from "react";
 import {Link} from 'react-router-dom';
 
-
-export const GenNav = ({...props}) => {
-
-
+export const GenNav = () => {
      return (
           <>
                <div className="gen-nav">
                     <Link to="/">
                          <button className="gen-nav-btn" type="submit">Home</button>
                     </Link>
-                    {/* Go to /about */}
                     <Link to="/about">
                          <button className="gen-nav-btn" type="submit">About</button>
                     </Link>

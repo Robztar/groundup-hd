@@ -1,6 +1,7 @@
 import { useStore } from '../../hooks/objStore';
 import { useState } from 'react';
 
+// ---- Edit Attributes of a Room ----
 export const Attribute = () =>{
      const [ objects, projects,
           changeColor, 
@@ -49,7 +50,6 @@ export const Attribute = () =>{
                     [
                          Math.floor(actUnits[0]), //metre
                          Math.floor((actUnits[0] % 1) * 100),   //cm
-                         // Math.floor((actUnits[0] % 0.01) * 1000)  //mm
                          Math.floor((((actUnits[0] % 1) * 100) % 1) * 10)  //mm
                     ],
                     // Y-axis
@@ -65,7 +65,6 @@ export const Attribute = () =>{
                          Math.floor((((actUnits[2] % 1) * 100) % 1) * 10)  //mm
                     ],
                ];
-               // console.log("Width is "+ actSubUnits[0][0]+"m, "+actSubUnits[0][1]+"cm, "+actSubUnits[0][2]+"mm.");
           }else if (scale === 'imperial'){
                actUnits = [dimensions[0],dimensions[1],dimensions[2]];
                actSubUnits = [
@@ -88,7 +87,6 @@ export const Attribute = () =>{
                          Math.floor((((actUnits[2] % 1) * 12) % 1) * 16)  //fract
                     ],
                ];
-               // console.log("Width is "+ actSubUnits[0][0]+"ft, "+actSubUnits[0][1]+" , "+actSubUnits[0][2]+"in.");
           }
 
           // Texture Attribute Management
@@ -116,6 +114,7 @@ export const Attribute = () =>{
                          ></i>
                     </div>
                     <div className='attr-menu'>
+                         {/* Changing Room floor Texture */}
                          <div 
                               className={`attr-li 
                                    ${ textureMenu || textureOptions ? 'active' : ''}
@@ -132,7 +131,6 @@ export const Attribute = () =>{
                                                             setOptions(false);
                                                             setTextureMenu(true);
                                                             setMatType('Plain',unique);
-                                                            // console.log('Options active: ' + textureOptions);
                                                        }}
                                                   >Plain</div>
                                                   <div className='type-row'
@@ -954,7 +952,6 @@ export const Attribute = () =>{
                                                   </div>
                                              </div>
                                         )}
-
                                    } else {
                                         return(
                                              <div className='attr-n'
@@ -967,7 +964,6 @@ export const Attribute = () =>{
                                         )
                                    }
                               }) () }
-
                          </div>
 
                          {/* ----- Changing Object Properties ----- */}
@@ -977,7 +973,6 @@ export const Attribute = () =>{
                                    ${ textureMenu || textureOptions ? 'inactive' : ''}
                               `}
                          >
-                              {/* {(() =>{ }) () } */}
                               {(() =>{ 
                                    if(propMenu){
                                         return(
@@ -1014,14 +1009,10 @@ export const Attribute = () =>{
                                                                            let rDimTemp;
                                                                            if(scale === 'metric'){
                                                                                 tot = lg + (med/100) + (sm/1000);
-                                                                                // console.log("Width is "+lg+"m, "+med+"cm, "+sm+"mm.");
-                                                                                // console.log("Total Width is " + tot);
                                                                                 rDimTemp=[tot/3, actUnits[1]/3,actUnits[2]/3];
                                                                            }else if(scale === 'imperial'){
                                                                                 let ret_sm = sm/(12*16);
                                                                                 tot = lg + (med/12) + (ret_sm);
-                                                                                // console.log("Width is "+lg+"ft, "+med+" and "+sm+"/16 in.");
-                                                                                // console.log("Total Width is " + tot);
                                                                                 rDimTemp=[tot/10, actUnits[1]/10,actUnits[2]/10];
                                                                            }
                                                                            setDimTemp(rDimTemp, unique);
@@ -1203,14 +1194,13 @@ export const Attribute = () =>{
                                                        </div> 
                                                        <div className='prop'>
                                                             <label className='prop-n'>Rotation</label>
-                                                            <div className='prop-fields' style={{'grid-template-columns': '1fr'}}>
+                                                            <div className='prop-fields' style={{'gridTemplateColumns': '1fr'}}>
                                                                  <input 
                                                                       className='prop-input'
                                                                       type="number" 
                                                                       min='-360' 
                                                                       max='360'
-                                                                      value={rotationY} 
-                                                                      // defaultValue={rotationY}
+                                                                      value={rotationY}
                                                                       id="rotation"
                                                                       step="5"
                                                                       onChange={(e) =>{
@@ -1218,12 +1208,11 @@ export const Attribute = () =>{
                                                                                 e.target.value = 0
                                                                            }
                                                                            let rDeg = e.target.value;
-                                                                           // console.log(rVal);
                                                                            setRotation(rDeg, unique);
                                                                       }}
                                                                  />
                                                             </div>
-                                                            <div className='prop-names' style={{'grid-template-columns': '1fr'}}>Degrees</div>
+                                                            <div className='prop-names' style={{'gridTemplateColumns': '1fr'}}>Degrees</div>
                                                        </div>
                                                   </div>
                                              </div>
@@ -1241,13 +1230,13 @@ export const Attribute = () =>{
                               }) () }
                          </div>
                     </div>
+                    {/* Delete Room */}
                     <div className='attr-footer'>
                          <div 
                               className='attr-n obj-remove'
                               onClick={() => {
                                    removeObj(unique);
                                    setAttrMenu('');
-                                   // setActive('');
                               }}
                          ><i className="fas fa-trash-alt"></i></div>
                     </div>
@@ -1257,40 +1246,3 @@ export const Attribute = () =>{
           return null
      }
 }
-
-// Buggy input-type:color implementation
-//<div className='attr-li'>
-// <label className='attr-n' htmlFor='color-input'> Color </label>
-// <input 
-//           className='attr-t'
-//           id='color-input'
-//           type={'color'} 
-//           // value={colorAttr} 
-//           value={objInstance.color} 
-//           onChange={(e) =>{
-//                colorAttr = e.target.value;
-//                ref.current.material.color.set(colorAttr);
-//           }}
-//           // onChange={function(e){
-//           //      colorAttr = e.target.value;
-//           //      ref.current.material.color.set(colorAttr);
-//           // }}
-//      />
-// </div>
-// <div className='attr-li'
-//      onClick={(e) =>{
-//           e.stopPropagation();
-//           changeColor(colorAttr, unique);
-//           console.log('current color is: ' + objInstance.color);
-//      }}
-// >Submit
-// </div>
-// <div className='attr-li'
-//      onClick={(e) =>{
-//           e.stopPropagation();
-//           // changeColor(colorAttr, unique);
-//           ref.current.material.color.set(objInstance.color);
-//           console.log('current color is: ' + objInstance.color);
-//      }}
-// >Cancel
-// </div>

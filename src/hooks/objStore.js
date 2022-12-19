@@ -1,7 +1,5 @@
 import create from 'zustand';
 import { nanoid } from 'nanoid';
-// import React, { useState, useRef, useEffect } from 'react';
-
 
 const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key));
 const setLocalStorage = (key, value) =>
@@ -14,11 +12,9 @@ export const useStore = create((set) => ({
      wallTexture: 'blank',    // default texture
      floorColor: 'white',     // default color
      floorTexture: 'wood',        // default texture
-     fixtures: getLocalStorage('fixtures') || [],             //array of fixture objects
-     furnishes: getLocalStorage('furnishes') || [],           //array of fixture objects
+     fixtures: getLocalStorage('fixtures') || [],      // storage/array of fixtures
 
-     // Check for projects in localStorage
-     projects: getLocalStorage('projects') || [],
+     projects: getLocalStorage('projects') || [],      // storage/array of projects
 
      // Add new project
      addProj: (name, scale, conv) =>{
@@ -34,10 +30,9 @@ export const useStore = create((set) => ({
           }))
      },
 
-     // Check for objects in localStorage
-     objects: getLocalStorage('world') || [],
+     objects: getLocalStorage('world') || [],          // storage/array of objects
      
-     // add whatever is requested
+     // add new object
      addObj: (projId, shape, objType) =>{
           set((state) => ({
                objects: [...state.objects,
@@ -56,7 +51,6 @@ export const useStore = create((set) => ({
                          active: 'none',          //state of object's MinSelect
                          resize: 'none',          //state of object's Resizer
                          attrMenu: 'none',        //state of object's Attribute menu
-                         furnishMenu: 'none',     //state of object's Furnish Menu
                          wallMenu: 'none',        //state of object's Walls Menu
                          matType: 'Plain',        //texture option selected
 
@@ -209,16 +203,6 @@ export const useStore = create((set) => ({
                ),
           }))
      },
-     // Makes the object's own Furnishing menu appear (and closes all others)
-     setFurnishMenu: (id) =>{
-          set((state) =>({
-               objects: state.objects.map((object) =>
-                    object.key === id
-                         ? ({...object, furnishMenu: 'grid'})
-                         : ({...object, furnishMenu: 'none'})
-               ),
-          }))
-     },
      // Makes the object's own Walls Menu appear (and closes all others)
      setWallMenu: (id) =>{
           set((state) =>({
@@ -242,7 +226,6 @@ export const useStore = create((set) => ({
      
 // ----- Object Properties Management -----
      // Set obj position state
-     // https://plainenglish.io/blog/using-zustand-and-typescript-to-make-a-to-do-list-in-react
      setPos: (curPos, id) =>{
           set((state) =>({
                objects: state.objects.map((object) =>
@@ -252,7 +235,6 @@ export const useStore = create((set) => ({
                ),
           }))
      },
-
      // Set obj color
      changeColor: (curColor, id) =>{
           set((state) =>({
@@ -273,7 +255,6 @@ export const useStore = create((set) => ({
                ),
           }))
      },
-
      // Set standard dimension multiplier of the object
      setDimTemp: (temp, id) =>{
           set((state) =>({
@@ -294,7 +275,6 @@ export const useStore = create((set) => ({
                ),
           }))
      },
-
      // remove the specified object
      removeObj: (id) => {
           set((state) => ({
@@ -303,20 +283,18 @@ export const useStore = create((set) => ({
           );
      },
 
-     // ----- Wall Properties Management
-     // Set obj position state
+// ----- Wall Properties Management
+     // Set wall position state
      setWallPos: (curPos, index, id) =>{
           set((state) =>({
                objects: state.objects.map((object) =>
                     object.key === id
-                         // ? ({...object, wallPos: state.objects.wallPos.map((wall) =>
-                         //      wall[index] = curPos
-                         // )})
                          ? ({...object, wallPos: curPos})
                          : object
                ),
           }))
      },
+     // Set the active wall
      setActiveWallNo: (id, wallNo) =>{
           set((state) =>({
                objects: state.objects.map((object) =>
@@ -346,6 +324,7 @@ export const useStore = create((set) => ({
                ),
           }))
      },
+     // Set wall thickness multiplier
      setWallDimTempX: (tempX, id) =>{
           set((state) =>({
                objects: state.objects.map((object) =>
@@ -355,6 +334,7 @@ export const useStore = create((set) => ({
                ),
           }))
      },
+     // Set wall height multiplier
      setWallDimTempY: (tempY, id) =>{
           set((state) =>({
                objects: state.objects.map((object) =>
@@ -365,6 +345,7 @@ export const useStore = create((set) => ({
           }))
      },
 
+// ----- Fixture Properties Management
      //Add New Fixtures
      addFixture: (wallNo, fixType, objId, projId, dim, col, text) =>{
           set((state) =>({
@@ -434,7 +415,4 @@ export const useStore = create((set) => ({
                }),
           );
      },
-
-
-
 }));

@@ -1,6 +1,6 @@
 import React from "react";
 
-
+// --- Reset Project (in Edit page) / Delete Project (Dash page)
 export const Confirm = ({...props}) => {
      const popMenu = props.popMenu;
      const togglePop = props.togglePop;

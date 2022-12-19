@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { FixTureMenu } from './FixtureMenu';
 
 export const WallMenu = () =>{
-     const [ 
-          objects, projects, fixtures,
+     const [ objects, projects, fixtures,
           changeWallColor, 
           changeWallTexture, 
           setActiveWallNo, 
@@ -13,8 +12,7 @@ export const WallMenu = () =>{
           addFixture,
           setWallDimTempX,
           setWallDimTempY,
-     ] = useStore((state) => [ 
-          state.objects, state.projects, state.fixtures,
+     ] = useStore((state) => [ state.objects, state.projects, state.fixtures,
           state.changeWallColor,
           state.changeWallTexture,
           state.setActiveWallNo,
@@ -32,7 +30,7 @@ export const WallMenu = () =>{
      const[fixCat,setFixCat] = useState(null);         //Fixture category
      const[addMenu,setAddMenu] = useState(false);      //Wall add fixture Interface
      const[fixEdit,setFixEditMenu] = useState(false);      //Wall fixture editing Interface
-     const[activeFix,setActiveFix] = useState('');      //active fixture Id Interface
+     const[activeFix,setActiveFix] = useState('');      //Active fixture Id Interface
      const[editMenu,setEdit] = useState(false);        //Wall edit Interface
      const[textureOptions,setOptions] = useState(false);    // Texture Options Menu
      const[textureMenu,setTextureMenu] = useState(false);   // Textures / Colors Menu
@@ -57,7 +55,6 @@ export const WallMenu = () =>{
 
           // Fixtures Management
           let fixInstance = fixtures.filter(e => e.objId === unique);
-          // console.log("Fixture Instance = "+ fixInstance);
 
           // Wall Dimension Development
           wallDimX = [
@@ -119,7 +116,6 @@ export const WallMenu = () =>{
                          Math.floor((((actWallY[3] % 1) * 100) % 1) * 10)  //mm
                     ],
                ];
-               // console.log("Width is "+ actSubUnits[0][0]+"m, "+actSubUnits[0][1]+"cm, "+actSubUnits[0][2]+"mm.");
           }else if (scale === 'imperial'){
                actWallX = [wallDimX[0],wallDimX[1],wallDimX[2],wallDimX[3]];
                actWallY = [wallDimY[0],wallDimY[1],wallDimY[2],wallDimY[3]];
@@ -298,7 +294,6 @@ export const WallMenu = () =>{
                                                             rWallYTemp[activeWallNo] = 1;
                                                             console.log("Add Wall X: "+rWallXTemp);
                                                        }
-                                                       // console.log("Wall X: "+rWallXTemp+" After");
                                                        setWallDimTempX(rWallXTemp, unique);
                                                        setWallDimTempY(rWallYTemp, unique);
                                                   }}
@@ -351,7 +346,6 @@ export const WallMenu = () =>{
                                                                            setOptions(false);
                                                                            setTextureMenu(true);
                                                                            setMatType('Plain',unique);
-                                                                           // console.log('Options active: ' + textureOptions);
                                                                       }}
                                                                  >Plain</div>
                                                                  <div className='type-row'
@@ -1239,7 +1233,6 @@ export const WallMenu = () =>{
                                                             <div className='wall-n'
                                                                  onClick={(e) =>{
                                                                       e.stopPropagation();
-                                                                      // setEditHome(false);
                                                                       setOptions(true);
                                                                  }}
                                                             >Wall Texture</div>
@@ -1263,9 +1256,7 @@ export const WallMenu = () =>{
                                                                                 setPropMenu(false);
                                                                            }}
                                                                       ><i className="fas fa-check-circle"></i></div>
-                                                                      {/* >Done</div> */}
                                                                  </div>
-                                                                 
                                                                  <div className='props-opts'>
                                                                       <div className='prop'>
                                                                            <label className='prop-n'>Wall Height</label>
@@ -1288,14 +1279,10 @@ export const WallMenu = () =>{
                                                                                           let rWallYTemp;
                                                                                           if(scale === 'metric'){
                                                                                                tot = lg + (med/100) + (sm/1000);
-                                                                                               // console.log("Width is "+lg+"m, "+med+"cm, "+sm+"mm.");
-                                                                                               // console.log("Total Width is " + tot);
                                                                                                rWallYTemp=[tot/3, tot/3, tot/3, tot/3];
                                                                                           }else if(scale === 'imperial'){
                                                                                                let ret_sm = sm/(12*16);
                                                                                                tot = lg + (med/12) + (ret_sm);
-                                                                                               // console.log("Width is "+lg+"ft, "+med+" and "+sm+"/16 in.");
-                                                                                               // console.log("Total Width is " + tot);
                                                                                                rWallYTemp=[tot/10, tot/10, tot/10, tot/10];
                                                                                           }
                                                                                           setWallDimTempY(rWallYTemp, unique);
@@ -1511,7 +1498,6 @@ export const WallMenu = () =>{
                                                                  e.stopPropagation();
                                                                  setFixMenu(true);
                                                                  setFixTypeMenu(false);
-                                                                 // setFixCat(null);
                                                             }}
                                                        ><i className="fas fa-times-circle"></i></div>
                                                   </div>
@@ -1598,7 +1584,6 @@ export const WallMenu = () =>{
                                                             <i className="fas fa-plus-circle"></i>
                                                             <label className='fix-n'>
                                                                  {fixCat === 'Door'? 'Exterior ':'Standard '}
-                                                                 {/* {(() =>{ }) () } */}
                                                                  {fixCat}
                                                             </label>
                                                        </div>
@@ -1632,7 +1617,6 @@ export const WallMenu = () =>{
                                                             <i className="fas fa-plus-circle"></i>
                                                             <label className='fix-n'>
                                                                  {fixCat === 'Door'? 'Interior ':'Tall '}
-                                                                 {/* {(() =>{ }) () } */}
                                                                  {fixCat}
                                                             </label>
                                                        </div>
@@ -1695,7 +1679,6 @@ export const WallMenu = () =>{
                                                        setFixEditMenu(false);
                                                        setActiveFix('');
                                                   }
-                                                  
                                              }}
                                         ><i className="fas fa-arrow-left"></i></div>
                                         <div className='wall-foot'>Wall {activeWallNo + 1}</div>
@@ -1721,7 +1704,6 @@ export const WallMenu = () =>{
                               )
                          }
                     }) () }
-                    {/* {(() =>{ }) () } */}
                </div>
           )
      }else{

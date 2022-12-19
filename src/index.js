@@ -1,10 +1,9 @@
-// npx create-react-app frontend
 import React from 'react';
-
+// React Routing
 import ReactDOM from 'react-dom';
-// $ npm install react-router-dom@6
 import { BrowserRouter } from "react-router-dom";
 
+// Styling accross app
 import './css/gen/style.css';
 import './css/about/about.css';
 import './css/dash/dash.css';
@@ -23,10 +22,3 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root'),
-// );

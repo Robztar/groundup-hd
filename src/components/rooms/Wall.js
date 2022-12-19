@@ -12,7 +12,6 @@ export const Wall = ({ ...props }) =>{
      const objInstance = props.instance;
      const conversion = props.conversion;
      const rotY = props.rotY;
-     const scale = props.scale;
      const ortho = props.ortho;
      const wallNo = props.wallNo;
 
@@ -20,7 +19,6 @@ export const Wall = ({ ...props }) =>{
 
      // Fixtures Management
      let fixInstances = fixtures.filter(e => e.objId === unique);
-     // console.log("Fixture Instance = "+ fixInstances);
 
      // Wall width (thickness) = 8in = 20.32cm = 0.203m (dimTemp = 0.068)
      let dimensions = [
@@ -35,8 +33,6 @@ export const Wall = ({ ...props }) =>{
      let box;
      let ground = -0.5;
      
-     // if(wallNo === 2){
-     // if(wallNo === 0){
      if(ortho){
           viewedHeight /= 2;
           ground *=6;
@@ -67,11 +63,7 @@ export const Wall = ({ ...props }) =>{
      
      prevPos[1] = (dimensions[1]/2)+ground;  //lift off the ground
 
-     if(scale === 'metric'){
-          box = new THREE.BoxBufferGeometry(dimensions[0],viewedHeight,dimensions[2]);
-     }else if (scale === 'imperial'){
-          box = new THREE.BoxBufferGeometry(dimensions[0],viewedHeight,dimensions[2]);
-     }
+     box = new THREE.BoxBufferGeometry(dimensions[0],viewedHeight,dimensions[2]);
 
      let wallColor = objInstance.wallColor[wallNo];
      let wallTexture = textures[objInstance.wallTexture[wallNo]];

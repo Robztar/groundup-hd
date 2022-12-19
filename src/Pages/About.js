@@ -2,35 +2,26 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../images/GroundUp-Logo.png';
 
-// https://www.positronx.io/how-to-trigger-onscroll-event-in-react-functional-component/
-
 const About = ()=>{
      const [percent, setPercent] = useState(0);
      const [notBase, setNotBase] = useState(true);
      const [notTop, setNotTop] = useState(false);
      
      const handleScroll = (e) =>{
-          const height = e.currentTarget.clientHeight;
-          const wHeight = document.getElementById('about-cont').offsetHeight;
-          console.log("Overall Height: " + height);
-          console.log("Window Height: " + wHeight);
+          const cheight = e.currentTarget.clientHeight;
           const sHeight = e.currentTarget.scrollHeight;
-          // console.log("Scroll Height?: " + sHeight);
           const sTop = e.currentTarget.scrollTop;
-          console.log("Distance from Top: " + sTop/2);
           if(sTop/2 === 0){
                setNotTop(false);
           }
-          if(sTop/2 > 0 && sTop/2 !== height*2.5){
+          if(sTop/2 > 0 && sTop/2 !== cheight*2.5){
                setNotBase(true);
                setNotTop(true);
           }
-          if(sTop/2 === height*2.5){
+          if(sTop/2 === cheight*2.5){
                setNotBase(false);
           }
-
-          const progress = ((sTop + height)/sHeight) * 100;
-          // console.log("Scroll Progress: " + progress);
+          const progress = ((sTop + cheight)/sHeight) * 100;
           setPercent((+progress.toFixed(0))+'%');
      }
           
@@ -43,7 +34,6 @@ const About = ()=>{
                
                {(() =>{ 
                     if(notTop){
-                         console.log('Not Top');
                          return(
                               <>
                                    {/* Floating Progress Bar */}
@@ -66,7 +56,6 @@ const About = ()=>{
                }) () }
                {(() =>{ 
                     if(notBase){
-                         console.log('Not Base');
                          return(
                               <>
                                    {/* Floating To-base Button */}
@@ -99,7 +88,6 @@ const About = ()=>{
                     }
                     return null;
                }) () }
-               
 
                <section className="about-sect" id='pres-head'>
                     <div></div>
