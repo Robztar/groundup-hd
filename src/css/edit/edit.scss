@@ -1,0 +1,378 @@
+.canvas-cont{
+     width: 100%;
+     height: 100%;
+     position: fixed;
+}
+
+// 3D Canvas
+.canvas{ 
+     overflow: hidden;
+}
+
+.sr-cont{
+     position: absolute;
+     // background: red;
+     top: 12%;
+     margin: 0 calc(50% - 9.5rem);
+     height: 3.5rem;
+     width: 19rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.space-reminder{
+     background: rgba(255, 255, 255, 0.5);
+     height: 3.5rem;
+     width: 19rem;
+     border-radius: 3rem;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+}
+
+.pointer{
+     position: absolute;
+     margin: 0;
+     padding: 0;
+     left: calc(50% - 15px);
+     top: calc(50% - 15px);
+     height: 30px;
+     width: 30px;
+     // max-height: 30px;
+     // max-width: auto;
+}
+.pointer img{
+     height: 35px;
+     opacity: 0.4;
+     width: auto;
+}
+
+// Navbar Styling
+.top{
+     position: fixed;
+     // background: red;
+     top: 0;
+}
+
+.navbar{
+     background: white;
+     margin-top: 2vh;
+     margin-left: 2vw;
+     width: 96vw;
+     height: 8vh;
+     border-radius: 4vh;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-around;
+     align-items: center;
+
+}
+// .home-btn{
+//      background: none;
+//      font-size: 1rem;
+//      border: none;
+//      width: fit-content;
+//      padding: 0.5rem 1rem;
+//      cursor: pointer;
+// }
+.edit-logo-cont{
+     height: 2rem;
+}
+.edit-logo-img{
+     margin: 0;
+     width: 2rem;
+     height: 2rem;
+     border: 1px solid black;
+     border-radius: 25%;
+     cursor: pointer;
+}
+.proj-head{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.nav-icons{
+     i{
+          border-radius: 50%;
+     	font-size: 2rem;
+          padding: 0 0.5rem;
+     	color: gray;
+     	cursor: pointer;
+     	transition: 0.3s ease;
+     }
+     .fa-save:hover{
+     	color: rgb(0, 140, 255);
+     }
+     .fa-times-circle:hover{
+     	color: red;
+     }
+}
+
+// Add Object Menu
+.drop-menu{
+     margin: 12vh 3vw 0;
+     width: 4rem;
+     height: 4rem;
+     border-radius: 10px;
+     background: rgba(255, 255, 255, 0.272);
+     transition: 0.5s;
+     display: flex;
+     flex-direction: column;
+}
+.drop-menu.active{
+     // width: 10rem;
+     // height: 10rem;
+     width: auto;
+     height: auto;
+     transition: 0.5s;
+}
+
+.exham {
+     // background: rgba(255, 0, 0, 0.272);
+     height: 4rem;
+     width: 4rem;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     transition: 0.5s;
+}
+
+.tripbar {
+     width: 2rem;
+     height: 1.5px;
+     border-radius: 2px;
+     background-color: white;
+     transition: 0.5s;
+     position: relative;
+}
+
+.tripbar:before, .tripbar:after {
+     content: "";
+     position: absolute;
+     width: inherit;
+     height: inherit;
+     background-color: white;
+     transition: 0.5s;
+}
+
+.tripbar:before {
+     transform: translateY(-10px);
+}
+
+.tripbar:after {
+     transform: translateY(10px);
+}
+
+.exham.active .tripbar {
+     transform: rotate(360deg);
+     background-color: transparent;
+}
+
+.exham.active .tripbar:before {
+     transform: translateY(0) rotate(45deg);
+}
+
+.exham.active .tripbar:after {
+     transform: translateY(0) rotate(-45deg);
+}
+
+.object-menu{
+     display: none;
+     transition: 0.5s;
+}
+.object-menu.active{
+     padding: 0 1rem;
+     margin-bottom: 1rem;
+     display: grid;
+     place-items: center;
+     // grid-template-rows: 1fr 1fr;
+     row-gap: 1rem;
+     transition: 0.5s;
+     // background: yellow;
+}
+.object-li{
+     display: grid;
+     grid-template-columns: 1fr;
+     place-items: center;
+     background: rgba(255, 255, 255, 0.400);
+     width: 10rem;
+     height: 5rem;
+     border-radius: 10px;
+     transition: 0.5s;
+     cursor: pointer;
+}
+.object-li:hover{
+     background: rgba(255, 255, 255, 0.800);
+     border-radius: 20px;
+}
+
+// Settings Menu
+.set-menu-cont{
+     margin: 12vh 0 0;
+     right: 3vw;
+     width: 4rem;
+     height: 4rem;
+     border-radius: 10px;
+     background: rgba(255, 255, 255, 0.272);
+     transition: 0.5s;
+     display: flex;
+     flex-direction: column;
+}
+.set-menu-cont.active{
+     // width: 10rem;
+     // height: 10rem;
+     width: auto;
+     height: auto;
+     transition: 0.5s;
+}
+.set-icon {
+     // background: rgba(255, 0, 0, 0.272);
+     height: 4rem;
+     width: 4rem;
+     font-size: 2rem;
+     color: white;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     transition: 0.5s;
+     :hover{
+          color: yellow
+     }
+}
+.set-icon:hover{
+     color: yellow
+}
+.set-icon.active{
+     align-self: flex-end;
+     transform: rotate(180deg);
+}
+.set-icon.active:hover{
+     color: rgb(255, 77, 77);
+}
+
+.set-menu{
+     display: none;
+     transition: 0.5s;
+}
+.set-menu.active{
+     padding: 0 1rem;
+     margin-bottom: 1rem;
+     display: grid;
+     place-items: center;
+     grid-template-rows: 1fr 1fr;
+     row-gap: 1rem;
+     transition: 0.5s;
+     // background: yellow;
+}
+.set-li{
+     display: flex;
+     justify-content: center;
+     align-items: space-around;
+     background: rgba(255, 255, 255, 0.400);
+     transition: 0.5s;
+     cursor: pointer;
+}
+.set-li:hover{
+     background: rgba(255, 255, 255, 0.800);
+     border-radius: 10px;
+}
+.set-scale{
+     border-radius: 2rem;
+     transition: 0.5s;
+     width: 11rem;
+     padding: 0.33rem;
+     cursor: default;
+}
+.set-scale:hover{
+     background: rgba(255, 255, 255, 0.400);
+     border-radius: 2rem;
+}
+.set-n{
+     display: grid;
+     place-items: center;
+     width: 50%;
+     height: 2.5rem;
+     margin: 0;
+     transition: 0.5s;
+     // background: purple;
+}
+.set-metric{
+     border-radius: 2rem;
+     cursor: pointer;
+     // background: magenta;
+}
+.set-metric.active{
+     background: yellow;
+     width: 70%;
+}
+.set-imperial{
+     border-radius: 2rem;
+     cursor: pointer;
+     // background: purple;
+}
+.set-imperial.active{
+     background: yellow;
+     width: 70%;
+}
+.set-reset{
+     width: 8rem;
+     background: rgba(255, 193, 193, 0.7);
+     i{
+          color: red;
+     }
+}
+.set-reset:hover{
+     background: rgb(255, 101, 101);
+     i{
+          color: black;
+     }
+}
+
+// Switch Styling
+.switch-cont {
+     position: absolute;
+     // background: red;
+     bottom: 5%;
+     margin: 0 calc(50% - 4.5rem);
+     height: 3.5rem;
+     width: 9rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.switch{
+     background: rgba(255, 255, 255, 0.5);
+     height: 3.5rem;
+     width: 9rem;
+     border-radius: 3rem;
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+}
+.selector{
+     margin: 0;
+     background: white;
+     height: 2.9rem;
+     width: 8.4rem;
+     border-radius: 3rem;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     cursor: pointer;
+     transition: 0.5s;
+}
+#two-d:hover{ 
+     background: rgb(118, 189, 243);
+     height: 3.5rem;
+     width: 9rem;
+     transition: 0.5s;
+}
+#three-d:hover{
+     background: rgb(231, 243, 118);
+     height: 3.5rem;
+     width: 9rem;
+     transition: 0.5s;
+}
