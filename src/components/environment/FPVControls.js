@@ -14,11 +14,11 @@ export const FPVControls = (props) => {
     document.addEventListener('keyup', (e) => {
       if (e.code === 'Space'){
         if (c <= 0){
-          controls.current.lock();
+          controls.current?.lock();
           c++;
         }
         else if(c > 0){
-          controls.current.unlock();
+          controls.current?.unlock();
           c--;
         }
       }
