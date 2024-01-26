@@ -17,11 +17,6 @@ export const Player = (props) => {
     ...props,
   }));
 
-  const velocity = useRef([0, 0, 0]);
-  useEffect(() => {
-    api.velocity.subscribe((v) => (velocity.current = v));
-  }, [api.velocity]);
-
   const pos = useRef([0, 0, 0]);
   useEffect(() => api.position.subscribe((v) => (pos.current = v)), [api.position]);
 
@@ -48,7 +43,7 @@ export const Player = (props) => {
       .multiplyScalar(SPEED)
       .applyEuler(camera.rotation);
 
-    api.velocity.set(direction.x, velocity.current[1], direction.z);
+    api.velocity.set(direction.x, 0, direction.z);
   });
   return (
     <>
